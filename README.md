@@ -39,5 +39,5 @@
 ---
 
 ## 📫 Me contacter
-* **LinkedIn :** [Insère ton lien LinkedIn ici]
+* **LinkedIn :** [https://www.linkedin.com/in/patrick-opely-b1458b145/]
 * **Localisation :** France / Remote.
