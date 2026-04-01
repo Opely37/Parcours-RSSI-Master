@@ -23,7 +23,7 @@
 ### 🕵️ Projet 1 : Analyse SOC & Threat Hunting
 * **Description :** Simulation d'attaque par Ransomware et analyse des logs pour identifier le vecteur d'entrée.
 * **Livrables :** Rapport de détection (Timeline de l'attaque) et mesures de remédiation.
-* 👉 *[Consulter le projet <a href="file:///Users/patrickopely/Downloads/index.html" target="_blank">Texte du lien</a>*
+* 👉 *[Consulter le projet <a href="index.html" target="_blank">Texte du lien</a>*
 
 ### 🛡️ Projet 2 : Analyse de Risques EBIOS RM
 * **Description :** Étude complète des menaces sur une infrastructure critique.
