@@ -13,7 +13,7 @@
 
 ### 📜 Gouvernance & Stratégie (RSSI)
 * **Analyse de Risques :** Maîtrise de la méthode **EBIOS RM** et ISO 27005.
-* **Conformité :** Mise en place de SMSI (ISO 27001), RGPD (DPO) et PSSI.
+* **Conformité :** Mise en place de SMSI (ISO 27001), RGPD (DPO) et PSSI. 
 * **Résilience :** Conception de Plan de Continuité d'Activité (PCA/PRA).
 
 ---
