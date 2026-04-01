@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patrick Opely — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #07090f;
+  --s1:        #0c1018;
+  --s2:        #101520;
+  --border:    #1c2535;
+  --cyan:      #00e5ff;
+  --cyan-dim:  rgba(0,229,255,.1);
+  --red:       #ff3b5c;
+  --red-dim:   rgba(255,59,92,.1);
+  --green:     #00ff88;
+  --green-dim: rgba(0,255,136,.08);
+  --amber:     #ffb800;
+  --amber-dim: rgba(255,184,0,.1);
+  --text:      #bcc8d8;
+  --muted:     #4a5f72;
+  --white:     #e8f0f8;
+  --syne:      'Syne', sans-serif;
+  --mono:      'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--syne);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,229,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,.022) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none; z-index: 0;
+}
+.orb { position: fixed; border-radius: 50%; filter: blur(130px); pointer-events: none; z-index: 0; }
+.orb1 { width:600px;height:600px;background:rgba(0,229,255,.12);top:-200px;right:-150px; }
+.orb2 { width:500px;height:500px;background:rgba(255,59,92,.08);bottom:0;left:-150px; }
+.wrap { max-width: 1020px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+
+/* NAV */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(24px);
+  background: rgba(7,9,15,.85);
+}
+.nav-inner {
+  max-width:1020px;margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;height:54px;gap:32px;
+}
+.nav-logo { font-family:var(--mono);font-size:13px;color:var(--cyan);letter-spacing:2px;margin-right:auto; }
+.nav-links { display:flex;gap:28px; }
+.nav-links a { font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s; }
+.nav-links a:hover { color:var(--cyan); }
+
+/* HERO */
+.hero { padding:150px 0 90px; }
+.hero-tag {
+  font-family:var(--mono);font-size:11px;color:var(--cyan);letter-spacing:3px;
+  text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:22px;
+  animation: up .6s ease both;
+}
+.hero-tag::before { content:'';width:36px;height:1px;background:var(--cyan); }
+.cursor { animation: blink 1s step-end infinite; }
+@keyframes blink { 50%{opacity:0;} }
+h1 {
+  font-size: clamp(44px,7vw,76px);
+  font-weight:800;color:var(--white);line-height:1.05;
+  margin-bottom:6px;animation:up .6s .1s ease both;
+}
+h1 em { color:var(--cyan);font-style:normal; }
+.hero-role {
+  font-family:var(--mono);font-size:clamp(13px,2vw,17px);
+  color:var(--cyan);margin-bottom:22px;animation:up .6s .2s ease both;
+}
+.hero-bio {
+  max-width:560px;font-size:15px;color:var(--text);line-height:1.85;
+  margin-bottom:34px;animation:up .6s .3s ease both;
+}
+.hero-btns { display:flex;gap:12px;flex-wrap:wrap;animation:up .6s .4s ease both; }
+.btn {
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:12px;letter-spacing:1px;
+  padding:10px 22px;border-radius:4px;text-decoration:none;
+  transition:all .2s;cursor:pointer;border:none;
+}
+.btn-primary { background:var(--cyan);color:#000;font-weight:500; }
+.btn-primary:hover { background:#33eeff;transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,229,255,.25); }
+.btn-outline { background:transparent;color:var(--cyan);border:1px solid rgba(0,229,255,.35); }
+.btn-outline:hover { background:var(--cyan-dim);transform:translateY(-2px); }
+
+/* STATS BAR */
+.stats {
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:1px;background:var(--border);border:1px solid var(--border);
+  border-radius:10px;overflow:hidden;margin:60px 0;
+  animation:up .6s .5s ease both;
+}
+.stat { background:var(--s1);padding:22px 16px;text-align:center; }
+.stat-val { font-family:var(--mono);font-size:26px;color:var(--cyan);display:block;margin-bottom:4px; }
+.stat-val.r{color:var(--red);}.stat-val.g{color:var(--green);}.stat-val.a{color:var(--amber);}
+.stat-label { font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase; }
+
+/* SECTION */
+section { margin-bottom:90px; }
+.sec-header {
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:36px;padding-bottom:16px;
+  border-bottom:1px solid var(--border);
+}
+.sec-icon { width:38px;height:38px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0; }
+.ic-cyan{background:rgba(0,229,255,.1);} .ic-red{background:rgba(255,59,92,.1);}
+.ic-green{background:rgba(0,255,136,.08);} .ic-amber{background:rgba(255,184,0,.1);}
+h2 { font-family:var(--mono);font-size:15px;font-weight:500;color:var(--white);letter-spacing:1px; }
+.sec-num { font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:auto; }
+
+/* CARDS */
+.grid { display:grid;gap:16px; }
+.g2 { grid-template-columns:repeat(2,1fr); }
+.g3 { grid-template-columns:repeat(3,1fr); }
+.card {
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:10px;padding:22px 24px;
+  transition:border-color .25s,transform .25s;
+  position:relative;overflow:hidden;
+}
+.card::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.card:hover { border-color:rgba(0,229,255,.3);transform:translateY(-3px); }
+.card:hover::before { opacity:1; }
+.card.red::before { background:linear-gradient(90deg,transparent,var(--red),transparent); }
+.card.red:hover { border-color:rgba(255,59,92,.3); }
+.card.green::before { background:linear-gradient(90deg,transparent,var(--green),transparent); }
+.card.green:hover { border-color:rgba(0,255,136,.3); }
+.card.amber::before { background:linear-gradient(90deg,transparent,var(--amber),transparent); }
+.card.amber:hover { border-color:rgba(255,184,0,.3); }
+
+.card-top {
+  display:flex;align-items:flex-start;justify-content:space-between;
+  margin-bottom:12px;
+}
+.card-tag {
+  font-family:var(--mono);font-size:10px;padding:3px 9px;
+  border-radius:3px;letter-spacing:1px;text-transform:uppercase;
+}
+.t-cyan  { background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(0,229,255,.2); }
+.t-red   { background:var(--red-dim);color:var(--red);border:1px solid rgba(255,59,92,.25); }
+.t-green { background:var(--green-dim);color:var(--green);border:1px solid rgba(0,255,136,.2); }
+.t-amber { background:var(--amber-dim);color:var(--amber);border:1px solid rgba(255,184,0,.2); }
+.t-muted { background:rgba(255,255,255,.04);color:var(--muted);border:1px solid var(--border); }
+
+.card-icon { font-size:22px; }
+.card h3 { font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px; }
+.card p { font-size:13px;color:var(--text);line-height:1.7; }
+
+/* PROJECT CARDS */
+.proj-card {
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:10px;overflow:hidden;
+  transition:border-color .25s,transform .25s;
+}
+.proj-card:hover { border-color:rgba(0,229,255,.3);transform:translateY(-3px); }
+.proj-header {
+  padding:20px 22px 16px;
+  border-bottom:1px solid var(--border);
+  background:var(--s2);
+}
+.proj-meta { display:flex;align-items:center;gap:10px;margin-bottom:10px; }
+.proj-num { font-family:var(--mono);font-size:11px;color:var(--muted); }
+.proj-body { padding:18px 22px; }
+.proj-title { font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px; }
+.proj-desc { font-size:13px;color:var(--text);line-height:1.7;margin-bottom:14px; }
+.proj-list { list-style:none;font-size:12.5px;color:var(--muted); }
+.proj-list li { padding:3px 0;display:flex;gap:8px;align-items:flex-start; }
+.proj-list li::before { content:'→';color:var(--cyan);flex-shrink:0; }
+.proj-footer {
+  padding:14px 22px;border-top:1px solid var(--border);
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.tech-pill {
+  font-family:var(--mono);font-size:10px;
+  padding:3px 9px;border-radius:20px;
+  background:rgba(0,229,255,.07);color:var(--cyan);
+  border:1px solid rgba(0,229,255,.15);
+  letter-spacing:.5px;
+}
+
+/* TIMELINE */
+.timeline { position:relative;padding-left:26px; }
+.timeline::before {
+  content:'';position:absolute;left:6px;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(to bottom,var(--cyan),var(--red));
+}
+.tl { position:relative;margin-bottom:18px; }
+.tl-dot {
+  position:absolute;left:-22px;top:14px;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--cyan);border:2px solid var(--bg);
+}
+.tl-dot.r{background:var(--red);} .tl-dot.a{background:var(--amber);}
+.tl-inner {
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:8px;padding:14px 18px;
+}
+.tl-date { font-family:var(--mono);font-size:11px;color:var(--cyan);margin-bottom:3px; }
+.tl-date.r{color:var(--red);} .tl-date.a{color:var(--amber);}
+.tl-title { font-size:14px;font-weight:600;color:var(--white);margin-bottom:2px; }
+.tl-co { font-family:var(--mono);font-size:11px;color:var(--muted); }
+
+/* SKILLS */
+.skill-row { display:flex;align-items:center;gap:14px;margin-bottom:13px; }
+.skill-name { font-size:13px;color:var(--text);width:180px;flex-shrink:0; }
+.skill-bar { flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden; }
+.skill-fill { height:100%;border-radius:3px;background:linear-gradient(90deg,var(--cyan),#008fb0);animation:grow 1.2s ease both; }
+@keyframes grow { from{width:0!important;} }
+.skill-pct { font-family:var(--mono);font-size:11px;color:var(--cyan);width:32px;text-align:right; }
+
+/* CERTS */
+.cert-card {
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:8px;padding:16px 20px;
+  display:flex;gap:16px;align-items:flex-start;
+  transition:border-color .2s;
+}
+.cert-card:hover { border-color:rgba(0,229,255,.3); }
+.cert-icon { font-size:24px;flex-shrink:0;margin-top:2px; }
+.cert-title { font-size:14px;font-weight:600;color:var(--white);margin-bottom:3px; }
+.cert-school { font-family:var(--mono);font-size:11px;color:var(--cyan); }
+.cert-year { font-family:var(--mono);font-size:11px;color:var(--muted); }
+
+/* CONTACT */
+.contact-grid {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+}
+.contact-card {
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:8px;padding:20px;text-align:center;
+  transition:border-color .2s,transform .2s;
+}
+.contact-card:hover { border-color:rgba(0,229,255,.3);transform:translateY(-2px); }
+.contact-icon { font-size:26px;margin-bottom:10px; }
+.contact-label { font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:6px; }
+.contact-val { font-size:13px;color:var(--white); }
+
+/* FOOTER */
+footer {
+  border-top:1px solid var(--border);
+  padding:32px 0;text-align:center;
+  font-family:var(--mono);font-size:11px;color:var(--muted);
+}
+footer span { color:var(--cyan); }
+
+@keyframes up { from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);} }
+
+@media(max-width:720px){
+  .g2,.g3,.stats,.contact-grid { grid-template-columns:1fr; }
+  .stats { grid-template-columns:repeat(2,1fr); }
+  .nav-links { display:none; }
+}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">P.OPELY<span class="cursor">_</span></div>
+    <div class="nav-links">
+      <a href="#about">À propos</a>
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences</a>
+      <a href="#experience">Expérience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="wrap">
+<section class="hero" id="about">
+  <div class="hero-tag">Cybersécurité & Systèmes <span class="cursor">█</span></div>
+  <h1>Patrick <em>Opely</em></h1>
+  <div class="hero-role">// Administrateur Systèmes & Réseaux · Master RSSI</div>
+  <p class="hero-bio">
+    Administrateur Systèmes & Réseaux avec plus de 7 ans d'expérience sur des environnements
+    Microsoft, Linux et VMware. Actuellement en Master RSSI à l'UTT, je me spécialise en
+    forensique numérique, réponse aux incidents, analyse de malwares et sécurisation
+    d'infrastructures SI.
+  </p>
+  <div class="hero-btns">
+    <a href="mailto:patrick.opely@gmail.com" class="btn btn-primary">✉ Me contacter</a>
+    <a href="#projets" class="btn btn-outline">→ Voir mes projets</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <span class="stat-val">7+</span>
+    <span class="stat-label">Ans d'expérience</span>
+  </div>
+  <div class="stat">
+    <span class="stat-val">5</span>
+    <span class="stat-label">Entreprises</span>
+  </div>
+  <div class="stat">
+    <span class="stat-val r">RSSI</span>
+    <span class="stat-label">Master en cours</span>
+  </div>
+  <div class="stat">
+    <span class="stat-val g">6</span>
+    <span class="stat-label">Projets Cyber</span>
+  </div>
+  <div class="stat">
+    <span class="stat-val a">N2/N3</span>
+    <span class="stat-label">Niveau support</span>
+  </div>
+</div>
+
+<!-- PROJETS MASTER RSSI -->
+<section id="projets">
+  <div class="sec-header">
+    <div class="sec-icon ic-red">🛡️</div>
+    <h2>PROJETS — MASTER RSSI</h2>
+    <span class="sec-num">01</span>
+  </div>
+
+  <!-- PROJET VEDETTE -->
+  <div class="proj-card" style="margin-bottom:16px;border-color:rgba(255,59,92,.25);">
+    <div class="proj-header">
+      <div class="proj-meta">
+        <span class="card-tag t-red">Projet Principal</span>
+        <span class="card-tag t-muted">Janvier 2026</span>
+        <span class="card-tag t-muted">INC-2019-001</span>
+      </div>
+      <div class="proj-title" style="font-size:18px;">🔍 Investiguez un incident de sécurité</div>
+    </div>
+    <div class="proj-body">
+      <p class="proj-desc">
+        Analyse forensique complète d'une compromission système par PDF malveillant.
+        Reconstitution de la chaîne d'attaque en 36 secondes, extraction de tous les IOC,
+        cartographie MITRE ATT&CK et plan de remédiation priorisé.
+        Classifié <strong style="color:var(--red);">CRITIQUE</strong> — Remote Code Execution.
+      </p>
+      <ul class="proj-list">
+        <li>Analyse mémoire RAM (4 GB) avec Volatility 3 — extraction processus, connexions réseau, lignes de commande</li>
+        <li>Analyse image disque E01 (10,6 GB) avec Sleuthkit — récupération des fichiers malveillants par inode</li>
+        <li>Reverse engineering du PDF avec pdf-parser — JavaScript malveillant exportDataObject() / nLaunch:2</li>
+        <li>Analyse macro VBA AutoOpen() avec oletools — détection Shell() dans verybad.doc</li>
+        <li>Identification chaîne anormale : AcroRd32.exe → WINWORD.EXE → cmd.exe → ntvdm.exe</li>
+        <li>Serveur C&C identifié : 2.16.117.17 (Akamai) — communication HTTP non chiffrée</li>
+        <li>6 techniques MITRE ATT&CK cartographiées (T1566, T1059, T1055, T1027, T1071, T1218)</li>
+      </ul>
+    </div>
+    <div class="proj-footer">
+      <span class="tech-pill">Volatility 3</span>
+      <span class="tech-pill">FTK Imager</span>
+      <span class="tech-pill">Sleuthkit</span>
+      <span class="tech-pill">pdf-parser</span>
+      <span class="tech-pill">oletools</span>
+      <span class="tech-pill">libewf</span>
+      <span class="tech-pill">MITRE ATT&CK</span>
+      <span class="tech-pill">Windows Forensics</span>
+      <span class="tech-pill">IOC</span>
+    </div>
+  </div>
+
+  <!-- AUTRES PROJETS MASTER -->
+  <div class="grid g2">
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-meta">
+          <span class="card-tag t-red">SOC</span>
+          <span class="card-tag t-muted">Déc. 2025</span>
+        </div>
+        <div class="proj-title">📡 Surveillance SOC & SIEM</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Déploiement d'un SIEM complet, mise en place de Sysmon et WinRM, corrélation d'événements et détection d'incidents en temps réel.</p>
+        <ul class="proj-list">
+          <li>Déploiement et configuration Wazuh / Splunk / ELK</li>
+          <li>Collecte de logs via Sysmon et WinRM</li>
+          <li>Corrélation d'événements et création de règles de détection</li>
+          <li>Triage des alertes selon criticité</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="tech-pill">Wazuh</span>
+        <span class="tech-pill">Splunk</span>
+        <span class="tech-pill">Sysmon</span>
+        <span class="tech-pill">ELK Stack</span>
+        <span class="tech-pill">WinRM</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-meta">
+          <span class="card-tag t-red">Pentest</span>
+          <span class="card-tag t-muted">Juil. 2025</span>
+        </div>
+        <div class="proj-title">⚔️ Audit & Tests d'Intrusion</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Pentest réseau et système complet : reconnaissance, exploitation de vulnérabilités, post-exploitation et analyse forensique des traces.</p>
+        <ul class="proj-list">
+          <li>Pentest réseau / système — exploitation de vulnérabilités</li>
+          <li>Analyse forensique des artefacts post-exploitation</li>
+          <li>Rapport de pentest avec recommandations priorisées</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="tech-pill">Kali Linux</span>
+        <span class="tech-pill">Metasploit</span>
+        <span class="tech-pill">Nmap</span>
+        <span class="tech-pill">Wireshark</span>
+        <span class="tech-pill">Burp Suite</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-meta">
+          <span class="card-tag t-amber">Sécurité Réseau</span>
+          <span class="card-tag t-muted">Oct. 2025</span>
+        </div>
+        <div class="proj-title">🔒 Sécurisation Infrastructure SI</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Conception et sécurisation d'une architecture réseau complète avec segmentation VLAN, durcissement serveurs et mise en place des règles Cisco / iptables.</p>
+        <ul class="proj-list">
+          <li>Architecture réseau sécurisée — segmentation VLAN</li>
+          <li>Configuration Cisco IOS, iptables, pfSense</li>
+          <li>Durcissement systèmes Linux et Windows Server</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="tech-pill">Cisco IOS</span>
+        <span class="tech-pill">iptables</span>
+        <span class="tech-pill">pfSense</span>
+        <span class="tech-pill">VLAN</span>
+        <span class="tech-pill">VPN</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-meta">
+          <span class="card-tag t-cyan">Gouvernance</span>
+          <span class="card-tag t-muted">Jan. 2026</span>
+        </div>
+        <div class="proj-title">📋 Gestion des Risques SI</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Analyse complète des risques du SI selon la méthodologie EBIOS Risk Manager, cartographie des actifs, PSSI et plan de traitement des risques.</p>
+        <ul class="proj-list">
+          <li>Cartographie des actifs et analyse d'impact (BIA)</li>
+          <li>Analyse des risques — méthode EBIOS Risk Manager</li>
+          <li>Rédaction PSSI et plan de traitement des risques</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="tech-pill">EBIOS RM</span>
+        <span class="tech-pill">ISO 27001</span>
+        <span class="tech-pill">ISO 27005</span>
+        <span class="tech-pill">PSSI</span>
+        <span class="tech-pill">BIA</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-meta">
+          <span class="card-tag t-amber">Threat Intel</span>
+          <span class="card-tag t-muted">Jan. 2026</span>
+        </div>
+        <div class="proj-title">🕵️ Veille Menaces Ransomware</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Analyse CTI sur les menaces ransomware : suivi des groupes APT, OSINT, cartographie MITRE ATT&CK et recommandations de défense.</p>
+        <ul class="proj-list">
+          <li>CTI — Cyber Threat Intelligence sur ransomwares</li>
+          <li>OSINT et analyse de rapports techniques</li>
+          <li>Cartographie MITRE ATT&CK des TTPs</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="tech-pill">CTI</span>
+        <span class="tech-pill">MITRE ATT&CK</span>
+        <span class="tech-pill">OSINT</span>
+        <span class="tech-pill">EDR/XDR</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-meta">
+          <span class="card-tag t-cyan">AppSec</span>
+          <span class="card-tag t-muted">Nov. 2025</span>
+        </div>
+        <div class="proj-title">🛠️ Sécurité Applicative</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Audit de code source, détection des vulnérabilités OWASP Top 10 et mise en œuvre d'une démarche DevSecOps avec SAST et DAST.</p>
+        <ul class="proj-list">
+          <li>Audit de code — Secure Code Review</li>
+          <li>OWASP Top 10 — détection et correction</li>
+          <li>SAST / DAST — tests automatisés</li>
+        </ul>
+      </div>
+      <div class="proj-footer">
+        <span class="tech-pill">OWASP ZAP</span>
+        <span class="tech-pill">Burp Suite</span>
+        <span class="tech-pill">SAST</span>
+        <span class="tech-pill">DAST</span>
+        <span class="tech-pill">Secure Code</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="competences">
+  <div class="sec-header">
+    <div class="sec-icon ic-cyan">⚡</div>
+    <h2>COMPÉTENCES TECHNIQUES</h2>
+    <span class="sec-num">02</span>
+  </div>
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="margin-bottom:20px;">🔐 Cybersécurité</h3>
+      <div class="skill-row"><span class="skill-name">Forensique numérique</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div><span class="skill-pct">88%</span></div>
+      <div class="skill-row"><span class="skill-name">Analyse malwares</span><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div><span class="skill-pct">82%</span></div>
+      <div class="skill-row"><span class="skill-name">SIEM / SOC</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div><span class="skill-pct">80%</span></div>
+      <div class="skill-row"><span class="skill-name">Pentest</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div><span class="skill-pct">75%</span></div>
+      <div class="skill-row"><span class="skill-name">Gestion des risques</span><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div><span class="skill-pct">78%</span></div>
+      <div class="skill-row"><span class="skill-name">Firewall Fortinet</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div><span class="skill-pct">85%</span></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:20px;">🖥️ Systèmes & Réseaux</h3>
+      <div class="skill-row"><span class="skill-name">Active Directory / GPO</span><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div><span class="skill-pct">92%</span></div>
+      <div class="skill-row"><span class="skill-name">Windows Server</span><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div><span class="skill-pct">90%</span></div>
+      <div class="skill-row"><span class="skill-name">Linux (RHEL/Ubuntu)</span><div class="skill-bar"><div class="skill-fill" style="width:87%"></div></div><span class="skill-pct">87%</span></div>
+      <div class="skill-row"><span class="skill-name">VMware vSphere</span><div class="skill-bar"><div class="skill-fill" style="width:83%"></div></div><span class="skill-pct">83%</span></div>
+      <div class="skill-row"><span class="skill-name">Réseau (VLAN/DHCP/DNS)</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div><span class="skill-pct">88%</span></div>
+      <div class="skill-row"><span class="skill-name">Bash / Python / PowerShell</span><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div><span class="skill-pct">78%</span></div>
+    </div>
+  </div>
+
+  <!-- OUTILS CLÉS -->
+  <div style="margin-top:16px;">
+    <div class="grid g3">
+      <div class="card amber">
+        <div class="card-top"><div class="card-tag t-amber">Forensique</div><div class="card-icon">🔬</div></div>
+        <h3>Outils d'analyse</h3>
+        <p style="margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--muted);line-height:2;">
+          Volatility 3 · FTK Imager · Sleuthkit<br>
+          pdf-parser · oletools · libewf<br>
+          Autopsy · Wireshark
+        </p>
+      </div>
+      <div class="card">
+        <div class="card-top"><div class="card-tag t-cyan">Infrastructure</div><div class="card-icon">🏗️</div></div>
+        <h3>Environnements</h3>
+        <p style="margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--muted);line-height:2;">
+          VMware vSphere · Proxmox<br>
+          Microsoft Azure · VirtualBox<br>
+          Nagios · Zabbix · Splunk
+        </p>
+      </div>
+      <div class="card green">
+        <div class="card-top"><div class="card-tag t-green">Gouvernance</div><div class="card-icon">📋</div></div>
+        <h3>Cadres & normes</h3>
+        <p style="margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--muted);line-height:2;">
+          MITRE ATT&CK · EBIOS RM<br>
+          ISO 27001 · ISO 27005<br>
+          RGPD · PSSI · NIST CSF
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPÉRIENCE -->
+<section id="experience">
+  <div class="sec-header">
+    <div class="sec-icon ic-amber">💼</div>
+    <h2>EXPÉRIENCE PROFESSIONNELLE</h2>
+    <span class="sec-num">03</span>
+  </div>
+  <div class="timeline">
+    <div class="tl">
+      <div class="tl-dot r"></div>
+      <div class="tl-inner">
+        <div class="tl-date r">Janvier 2025 – Janvier 2026</div>
+        <div class="tl-title">Analyste d'Exploitation / Analyste SOC</div>
+        <div class="tl-co">La Bred · Paris</div>
+        <p style="font-size:13px;color:var(--text);margin-top:8px;">
+          Supervision des environnements mainframe et production critique (Control-M), analyse forensique, réponse aux incidents de sécurité N2/N3, patch management et gestion des bascules réseau (DAWAF, F5).
+        </p>
+      </div>
+    </div>
+    <div class="tl">
+      <div class="tl-dot"></div>
+      <div class="tl-inner">
+        <div class="tl-date">Mai 2024 – Décembre 2024</div>
+        <div class="tl-title">Administrateur Systèmes & Réseaux</div>
+        <div class="tl-co">Burger King · France</div>
+        <p style="font-size:13px;color:var(--text);margin-top:8px;">
+          Administration Active Directory 500+ utilisateurs, GPO, virtualisation VMware/Proxmox, configuration réseau (VLANs, DHCP, DNS, Fortinet), déploiement de postes, scripting Bash/Python.
+        </p>
+      </div>
+    </div>
+    <div class="tl">
+      <div class="tl-dot"></div>
+      <div class="tl-inner">
+        <div class="tl-date">Janvier 2023 – Avril 2024</div>
+        <div class="tl-title">Administrateur Systèmes & Réseaux</div>
+        <div class="tl-co">ALDI · France</div>
+        <p style="font-size:13px;color:var(--text);margin-top:8px;">
+          Administration serveurs Linux (RHEL, Ubuntu) et Windows Server, gestion réseau LAN, supervision Nagios/Zabbix, virtualisation VMware/Proxmox, support N2/N3.
+        </p>
+      </div>
+    </div>
+    <div class="tl">
+      <div class="tl-dot a"></div>
+      <div class="tl-inner">
+        <div class="tl-date a">Février 2018 – Novembre 2022</div>
+        <div class="tl-title">Technicien Systèmes & Réseaux</div>
+        <div class="tl-co">Arval BNP Paribas · Neuilly-sur-Seine</div>
+        <p style="font-size:13px;color:var(--text);margin-top:8px;">
+          Support N2/N3 multi-sites, administration Windows Server / Active Directory / GPO, gestion du parc informatique, téléphonie IP (IPBX), câblage réseau, ServiceNow / GLPI.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATIONS -->
+<section>
+  <div class="sec-header">
+    <div class="sec-icon ic-green">🎓</div>
+    <h2>FORMATIONS</h2>
+    <span class="sec-num">04</span>
+  </div>
+  <div class="grid" style="gap:12px;">
+    <div class="cert-card" style="border-color:rgba(255,59,92,.25);">
+      <div class="cert-icon">🔐</div>
+      <div>
+        <div class="cert-title">Master RSSI — Responsable Sécurité des Systèmes d'Information</div>
+        <div class="cert-school">Université UTT</div>
+        <div class="cert-year">2025 – 2026 · En cours</div>
+      </div>
+      <div style="margin-left:auto;display:flex;flex-direction:column;gap:4px;flex-shrink:0;">
+        <span class="card-tag t-red">En cours</span>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🖥️</div>
+      <div>
+        <div class="cert-title">Bac+3/4 — Administrateur Système Réseau</div>
+        <div class="cert-school">OpenClassrooms</div>
+        <div class="cert-year">2018 – 2019</div>
+      </div>
+      <div style="margin-left:auto;flex-shrink:0;">
+        <span class="card-tag t-green">Obtenu</span>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🌐</div>
+      <div>
+        <div class="cert-title">Bac+2 — Administrateur Système Réseau</div>
+        <div class="cert-school">AFPA Bagneux</div>
+        <div class="cert-year">2014 – 2015</div>
+      </div>
+      <div style="margin-left:auto;flex-shrink:0;">
+        <span class="card-tag t-green">Obtenu</span>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">💻</div>
+      <div>
+        <div class="cert-title">Licence Développeur Web</div>
+        <div class="cert-school">3W Academy · Paris</div>
+        <div class="cert-year">2013</div>
+      </div>
+      <div style="margin-left:auto;flex-shrink:0;">
+        <span class="card-tag t-green">Obtenu</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-header">
+    <div class="sec-icon ic-cyan">📡</div>
+    <h2>CONTACT</h2>
+    <span class="sec-num">05</span>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-icon">📧</div>
+      <div class="contact-label">Email</div>
+      <div class="contact-val">patrick.opely@gmail.com</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📱</div>
+      <div class="contact-label">Téléphone</div>
+      <div class="contact-val">07 49 51 71 82</div>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📍</div>
+      <div class="contact-label">Localisation</div>
+      <div class="contact-val">Neuilly-sur-Seine, 92200</div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="wrap">
+    <span>Patrick Opely</span> · Administrateur Systèmes & Réseaux · Master RSSI &nbsp;|&nbsp;
+    Neuilly-sur-Seine &nbsp;|&nbsp; <span>2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
